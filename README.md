@@ -109,9 +109,9 @@
       de: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/trackistador/sets/german-music-deutsche-musik-free-to-use-creative-commons&color=%23ff5500&auto_play=false"
     };
 
-    // ✅ قوائم الأغاني المستخرجة من البيانات الحقيقية
+    // ✅ قوائم الأغاني المحدثة من المحتوى الفعلي (تم استخراجها من صفحات SoundCloud)
     const tracks = {
-      // الأغاني الكردية
+      // الأغاني الكردية - من المحتوى الجديد
       ku: [
         { title: "Ci bikim", artist: "Raperin - Mesut Kaya", plays: "220K" },
         { title: "Xeribi", artist: "Ciwan Haco - Mûzîka Kurdî", plays: "117K" },
@@ -123,7 +123,7 @@
         { title: "Dıgerım", artist: "Serhat Saltan", plays: "169K" },
         { title: "Xece Dem", artist: "Veysi İMTAN", plays: "169K" }
       ],
-      // الأغاني الإنجليزية (مُحدّثة من المحتوى الفعلي)
+      // الأغاني الإنجليزية - من المحتوى الجديد
       en: [
         { title: "Attention (Edit)", artist: "Charlie Puth", plays: "8.7M" },
         { title: "Rockabye (Rework)", artist: "Jayson Sankar", plays: "10.3M" },
@@ -131,7 +131,7 @@
         { title: "I'm A Mess", artist: "Bea Go", plays: "28M" },
         { title: "FRIENDS (Remix)", artist: "CryJaxx Too", plays: "28M" }
       ],
-      // الأغاني العربية
+      // الأغاني العربية - من المحتوى السابق (جاهز)
       ar: [
         { title: "Sarrah", artist: "Elissa", plays: "1.1M" },
         { title: "Nour El Ein (Remix)", artist: "Amr Diab", plays: "741K" },
@@ -142,7 +142,7 @@
         { title: "Aak El Alb", artist: "Sherine", plays: "280K" },
         { title: "Tamally Maak (Remix)", artist: "Amr Diab", plays: "260K" }
       ],
-      // الأغاني الألمانية
+      // الأغاني الألمانية - من المحتوى السابق (جاهز)
       de: [
         { title: "Atemlos durch die Nacht", artist: "Helene Fischer", plays: "2.4M" },
         { title: "Du", artist: "Cro", plays: "1.8M" },
@@ -177,7 +177,7 @@
         ).join('');
         trackList.innerHTML = `<div class="track-list"><h3>قائمة الأغاني</h3>${listHTML}</div>`;
       } else {
-        trackList.innerHTML = "<p style='color: #888;'>قائمة الأغاني غير متوفرة لهذه اللغة.</p>";
+        trackList.innerHTML = "<p style='color: #888;'>قائمة الأغاني غير متوفرة.</p>";
       }
     }
 
