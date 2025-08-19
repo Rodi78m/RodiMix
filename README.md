@@ -429,11 +429,11 @@ Rodi.Mix
   <div id="track-list" class="fade-in" style="animation-delay: 0.3s;"></div>
   
   <div class="footer">
-    Works on all devices including Android | Version <span>2.1</span>
+    Works on all devices including Android | Version <span>2.2</span>
   </div>
 
   <script>
-    // الروابط مع التشغيل التلقائي
+    // ✅ الروابط المُحدّثة بناءً على المحتوى الفعلي في قاعدة المعرفة
     const players = {
       ku: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/yusuf-i-k-685870955/sets/kurdish-music&color=%234CAF50&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false",
       ar: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/bader-alzman/sets/2025a1&color=%234CAF50&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false",
@@ -441,9 +441,9 @@ Rodi.Mix
       de: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-218498324/sets/deutsch-rap-remix&color=%234CAF50&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"
     };
 
-    // قوائم الأغاني من المحتوى الفعلي (مستخرجة من قاعدة المعرفة)
+    // ✅ قوائم الأغاني المُستخرجة بدقة من المحتوى الفعلي في قاعدة المعرفة
     const tracks = {
-      // الأغاني الكردية - من المحتوى الجديد في قاعدة المعرفة
+      // الأغاني الكردية - من المحتوى الفعلي في قاعدة المعرفة
       ku: [
         { title: "Ez Kurdistan Im", artist: "Serhado", plays: "" },
         { title: "Zap Zap Zape", artist: "sanliurfaHDP", plays: "" },
@@ -453,16 +453,16 @@ Rodi.Mix
       ],
       // الأغاني العربية - من المحتوى الفعلي في قاعدة المعرفة
       ar: [
-        { title: "Sarrah", artist: "Elissa", plays: "1.1M" },
-        { title: "Nour El Ein (Remix)", artist: "Amr Diab", plays: "741K" },
-        { title: "Ya Tabtab (Remix)", artist: "Nancy Ajram", plays: "667K" },
-        { title: "Etmad", artist: "Tamer Hosny", plays: "420K" },
-        { title: "Ya Reit", artist: "Mohamed Mounir", plays: "320K" }
+        { title: "Raperin - Ci bikim", artist: "Mesut Kaya", plays: "220K" },
+        { title: "Ciwan Haco - Xeribi", artist: "Mûzîka Kurdî", plays: "117K" },
+        { title: "Sebra Dılemın", artist: "Erol Berxwedan", plays: "56.3K" },
+        { title: "Min Bihisti", artist: "Ceger Issa", plays: "191K" },
+        { title: "Emir Kuda Çu [Roj 2020]", artist: "Hozan Dîno", plays: "72K" }
       ],
       // الأغاني الإنجليزية - من المحتوى الفعلي في قاعدة المعرفة
       en: [
-        { title: "Attention (Edit)", artist: "Charlie Puth", plays: "8.7M" },
-        { title: "Rockabye (Rework)", artist: "Jayson Sankar", plays: "10.3M" },
+        { title: "Attention (Roman Müller Edit)", artist: "Charlie Puth", plays: "8.7M" },
+        { title: "Rockabye (JT Rework)", artist: "Jayson Sankar", plays: "10.3M" },
         { title: "We Dont Talk Anymore (Cover)", artist: "salimahgz", plays: "3M" },
         { title: "I'm A Mess", artist: "Bea Go", plays: "28M" },
         { title: "FRIENDS (Remix)", artist: "CryJaxx Too", plays: "28M" }
@@ -509,8 +509,9 @@ Rodi.Mix
       const trackList = document.getElementById('track-list');
       
       // تحديث مؤشر الحالة
-      document.querySelector('.status-indicator').style.background = '#ccc';
-      document.querySelector('.status-indicator').style.boxShadow = '0 0 0 2px white';
+      const statusIndicator = document.querySelector('.status-indicator');
+      statusIndicator.style.background = '#ccc';
+      statusIndicator.style.boxShadow = '0 0 0 2px white';
       
       // إظهار شريط التحميل
       startLoading();
@@ -524,8 +525,8 @@ Rodi.Mix
             playerBox.innerHTML = `<iframe src="${players[lang]}" allow="autoplay; encrypted-media" allowtransparency="true" frameborder="no" scrolling="no"></iframe>`;
             stopLoading();
             // تحديث مؤشر الحالة
-            document.querySelector('.status-indicator').style.background = var(--spring-primary);
-            document.querySelector('.status-indicator').style.boxShadow = '0 0 0 4px rgba(76, 175, 80, 0.3)';
+            statusIndicator.style.background = 'var(--spring-primary)';
+            statusIndicator.style.boxShadow = '0 0 0 4px rgba(76, 175, 80, 0.3)';
           }, 150);
         } else {
           // للمتصفحات الأخرى
@@ -533,8 +534,8 @@ Rodi.Mix
           stopLoading();
           // تحديث مؤشر الحالة
           setTimeout(() => {
-            document.querySelector('.status-indicator').style.background = var(--spring-primary);
-            document.querySelector('.status-indicator').style.boxShadow = '0 0 0 4px rgba(76, 175, 80, 0.3)';
+            statusIndicator.style.background = 'var(--spring-primary)';
+            statusIndicator.style.boxShadow = '0 0 0 4px rgba(76, 175, 80, 0.3)';
           }, 300);
         }
       } else {
