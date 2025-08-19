@@ -429,11 +429,11 @@
   <div id="track-list" class="fade-in" style="animation-delay: 0.3s;"></div>
   
   <div class="footer">
-    Works on all devices including Android | Version <span>2.2</span>
+    Works on all devices including Android | Version <span>2.3</span>
   </div>
 
   <script>
-    // ✅ الروابط المُحدّثة بناءً على المحتوى الفعلي في قاعدة المعرفة
+    // الروابط المُحدّثة بناءً على المحتوى الفعلي
     const players = {
       ku: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/yusuf-i-k-685870955/sets/kurdish-music&color=%234CAF50&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false",
       ar: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/bader-alzman/sets/2025a1&color=%234CAF50&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false",
@@ -441,9 +441,9 @@
       de: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-218498324/sets/deutsch-rap-remix&color=%234CAF50&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"
     };
 
-    // ✅ قوائم الأغاني المُستخرجة بدقة من المحتوى الفعلي في قاعدة المعرفة
+    // قوائم الأغاني من المحتوى الفعلي
     const tracks = {
-      // الأغاني الكردية - من المحتوى الفعلي في قاعدة المعرفة
+      // الأغاني الكردية - من المحتوى الفعلي
       ku: [
         { title: "Ez Kurdistan Im", artist: "Serhado", plays: "" },
         { title: "Zap Zap Zape", artist: "sanliurfaHDP", plays: "" },
@@ -451,7 +451,7 @@
         { title: "Awazê Çiya | Navê Wê", artist: "ewrêdeng", plays: "" },
         { title: "Awaze çiya - biji biji ypg", artist: "kurdishmusics", plays: "" }
       ],
-      // الأغاني العربية - من المحتوى الفعلي في قاعدة المعرفة
+      // الأغاني العربية - من المحتوى الفعلي
       ar: [
         { title: "Raperin - Ci bikim", artist: "Mesut Kaya", plays: "220K" },
         { title: "Ciwan Haco - Xeribi", artist: "Mûzîka Kurdî", plays: "117K" },
@@ -459,7 +459,7 @@
         { title: "Min Bihisti", artist: "Ceger Issa", plays: "191K" },
         { title: "Emir Kuda Çu [Roj 2020]", artist: "Hozan Dîno", plays: "72K" }
       ],
-      // الأغاني الإنجليزية - من المحتوى الفعلي في قاعدة المعرفة
+      // الأغاني الإنجليزية - من المحتوى الفعلي
       en: [
         { title: "Attention (Roman Müller Edit)", artist: "Charlie Puth", plays: "8.7M" },
         { title: "Rockabye (JT Rework)", artist: "Jayson Sankar", plays: "10.3M" },
@@ -467,7 +467,7 @@
         { title: "I'm A Mess", artist: "Bea Go", plays: "28M" },
         { title: "FRIENDS (Remix)", artist: "CryJaxx Too", plays: "28M" }
       ],
-      // الأغاني الألمانية - من المحتوى الفعلي في قاعدة المعرفة
+      // الأغاني الألمانية - من المحتوى الفعلي
       de: [
         { title: "Ssio ehrenloser remix", artist: "Nikurazu", plays: "" },
         { title: "Paris Freestyle x Gangstas Paradise", artist: "r58", plays: "" },
@@ -568,38 +568,13 @@
             <p style="margin: 0 0 15px; font-weight: bold; font-size: 1.2rem; color: var(--spring-dark);">Tap language button to start playback</p>
             <p style="margin: 0; font-size: 0.95rem; color: #777;">Some Android browsers require user interaction before auto play</p>
           </div>`;
-          
-        // تحميل اللغة الكردية كخلفية (بدون عرض)
-        const tempDiv = document.createElement('div');
-        tempDiv.style.display = 'none';
-        tempDiv.innerHTML = `<iframe src="${players.ku}"></iframe>`;
-        document.body.appendChild(tempDiv);
       } else {
         load('ku');
       }
     };
 
-    // لتحسين تجربة التشغيل على أندرويد
-    document.addEventListener('touchstart', function(e) {
-      if (e.target.closest('button')) {
-        e.target.classList.add('touch-feedback');
-        setTimeout(() => e.target.classList.remove('touch-feedback'), 300);
-      }
-      
-      if (!isLoading && currentLang && !e.target.closest('button')) {
-        // إعادة تحميل المشغل عند أول تفاعل
-        load(currentLang);
-      }
-    }, { passive: true });
-    
-    // إزالة تأثير اللمس بعد الانتهاء
-    document.addEventListener('touchend', function(e) {
-      if (e.target.closest('button')) {
-        setTimeout(() => {
-          if (e.target) e.target.classList.remove('touch-feedback');
-        }, 300);
-      }
-    }, { passive: true });
+    // ✅ تم إزالة حدث touchstart الذي كان يعيد التحميل عند أي تفاعل
+    // لا يوجد الآن أي إعادة تحميل عند لمس الشاشة
   </script>
 
 </body>
