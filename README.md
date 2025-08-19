@@ -1,4 +1,3 @@
-# RodiMix
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -6,33 +5,78 @@
   <title>Rodi Mix Radio</title>
   <style>
     body {
-      font-family: sans-serif;
-      background: #eee;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f3e9;
       text-align: center;
       margin: 0;
       padding: 20px;
+      color: #333;
+    }
+    h2 {
+      color: #8B4513;
     }
     button {
-      margin: 5px;
-      padding: 10px;
+      margin: 8px;
+      padding: 12px 20px;
       border: none;
       background: #8B4513;
       color: #fff;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 16px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #A0522D;
     }
     iframe {
-      width: 100%;
+      width: 90%;
       max-width: 700px;
       height: 300px;
       border: none;
       margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    .track-list {
+      width: 90%;
+      max-width: 700px;
+      margin: 20px auto;
+      text-align: dir;
+      background: white;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 15px;
+    }
+    .track-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+    .track-item:last-child {
+      border-bottom: none;
+    }
+    .track-title {
+      font-weight: bold;
+      color: #5a3921;
+    }
+    .track-stats {
+      color: #8B4513;
+      font-size: 13px;
     }
     #player-box {
       margin-top: 20px;
+    }
+    @media (max-width: 600px) {
+      .track-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .track-stats {
+        margin-top: 5px;
+      }
     }
   </style>
 </head>
@@ -46,26 +90,68 @@
   <button onclick="load('de')">Deutsch</button>
 
   <div id="player-box"></div>
+  <div id="track-list"></div>
 
   <script>
-    const links = {
-      ar: "https://w.soundcloud.com/player/?url=https%3A//on.soundcloud.com/8F4OjyT2rhUL06Friu&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
-      ku: "https://w.soundcloud.com/player/?url=https%3A//on.soundcloud.com/TRu6ULP4OOhHfDiSuq&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
-      en: "https://w.soundcloud.com/player/?url=https%3A//on.soundcloud.com/uasUDhCcNVwcpXOmxw&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
-      de: "https://w.soundcloud.com/player/?url=https%3A//on.soundcloud.com/8S47Uqyf05VRGGCDRn&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
+    // روابط المشغل
+    const players = {
+      ku: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/hedar-hussein/sets/kurdish-music&color=%23ff5500&auto_play=false",
+      ar: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/trackistador/sets/arabic-egyptian-oriental-music-free-to-use-creative-commons&color=%23ff5500&auto_play=false",
+      en: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/aamir-khan-53/sets/best-english-songs-2021&color=%23ff5500&auto_play=false",
+      de: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/trackistador/sets/german-music-deutsche-musik-free-to-use-creative-commons&color=%23ff5500&auto_play=false"
+    };
+
+    // بيانات الأغاني (تم جمعها من المحتوى الذي وفرته)
+    const tracks = {
+      ku: [
+        { title: "Raperin - Ci bikim", artist: "Mesut Kaya", plays: "220K" },
+        { title: "Ciwan Haco - Xeribi", artist: "Mûzîka Kurdî", plays: "117K" },
+        { title: "Sebra Dılemın", artist: "Erol Berxwedan", plays: "56.3K" },
+        { title: "Min Bihisti", artist: "Ceger Issa", plays: "191K" },
+        { title: "Emir Kuda Çu [Roj 2020]", artist: "Hozan Dîno", plays: "72K" },
+        { title: "evin u jinda | rewiyen xakurke", artist: "rodinbaran", plays: "35.4K" },
+        { title: "SEWDASIZAMIN", artist: "BRADER", plays: "130K" },
+        { title: "Dıgerım", artist: "Serhat Saltan", plays: "169K" },
+        { title: "Xece Dem", artist: "Veysi İMTAN", plays: "169K" }
+      ],
+      en: [
+        { title: "Attention (Roman Müller Edit)", artist: "Charlie Puth", plays: "8.7M" },
+        { title: "Rockabye (JT Rework)", artist: "Jayson Sankar", plays: "10.3M" },
+        { title: "We Dont Talk Anymore (Cover)", artist: "salimahgz", plays: "3M" },
+        { title: "I'm A Mess", artist: "Bea Go", plays: "28M" },
+        { title: "FRIENDS (Remix)", artist: "CryJaxx Too", plays: "28M" }
+      ]
+      // يمكنك إضافة العربية والألمانية لاحقًا بنفس الطريقة
     };
 
     function load(lang) {
       const playerBox = document.getElementById('player-box');
-      if (links[lang]) {
-        playerBox.innerHTML = `<iframe src="${links[lang]}" allow="autoplay" loading="lazy"></iframe>`;
+      const trackList = document.getElementById('track-list');
+
+      // تحميل المشغل
+      if (players[lang]) {
+        playerBox.innerHTML = `<iframe src="${players[lang]}" allow="autoplay" loading="lazy" title="مشغل موسيقى ${lang}"></iframe>`;
       } else {
-        playerBox.innerHTML = "<p>محتوى غير متوفر</p>";
+        playerBox.innerHTML = "<p style='color: #888;'>المشغل غير متوفر.</p>";
+      }
+
+      // تحميل قائمة الأغاني
+      if (tracks[lang]) {
+        const listHTML = tracks[lang].map(track => 
+          `<div class="track-item">
+            <div class="track-title">${track.title}</div>
+            <div class="track-artist">${track.artist}</div>
+            <div class="track-stats">${track.plays} تشغيلاً</div>
+          </div>`
+        ).join('');
+        trackList.innerHTML = `<div class="track-list">${listHTML}</div>`;
+      } else {
+        trackList.innerHTML = ""; // اتركها فارغة إذا لم تكن متوفرة
       }
     }
 
-    // تحميل اللغة الافتراضية عند فتح الصفحة (مثلاً الكردية)
-    load('ku');
+    // تحميل المحتوى الكردي افتراضيًا
+    window.onload = () => load('ku');
   </script>
 
 </body>
