@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Rodi.Mix
 <html lang="ar">
 <head>
   <meta charset="UTF-8" />
@@ -93,65 +93,55 @@
   <h2>🎧 Rodi Mix Radio</h2>
 
   <button onclick="load('ku')">كردي</button>
-  <button onclick="load('en')">English</button>
   <button onclick="load('ar')">العربية</button>
+  <button onclick="load('en')">English</button>
   <button onclick="load('de')">Deutsch</button>
 
   <div id="player-box"></div>
   <div id="track-list"></div>
 
   <script>
-    // الروابط الأصلية (لا يمكن استخدام on.soundcloud.com مباشرة)
+    // ✅ الروابط الجديدة (مُعدّة للإضافة)
     const players = {
-      ku: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/hedar-hussein/sets/kurdish-music&color=%23ff5500&auto_play=false",
-      en: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/aamir-khan-53/sets/best-english-songs-2021&color=%23ff5500&auto_play=false",
-      ar: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/trackistador/sets/arabic-egyptian-oriental-music-free-to-use-creative-commons&color=%23ff5500&auto_play=false",
-      de: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/trackistador/sets/german-music-deutsche-musik-free-to-use-creative-commons&color=%23ff5500&auto_play=false"
+      ku: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/yusuf-i-k-685870955/sets/kurdish-music&color=%23ff5500&auto_play=false",
+      ar: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/bader-alzman/sets/2025a1&color=%23ff5500&auto_play=false",
+      en: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/turbulentz/sets/clean-hits-2025-best-pop-clean&color=%23ff5500&auto_play=false",
+      de: "https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-218498324/sets/deutsch-rap-remix&color=%23ff5500&auto_play=false"
     };
 
-    // ✅ قوائم الأغاني المحدثة من المحتوى الفعلي (تم استخراجها من صفحات SoundCloud)
+    // ✅ قوائم الأغاني من المحتوى الفعلي
     const tracks = {
-      // الأغاني الكردية - من المحتوى الجديد
+      // الأغاني الكردية - من المحتوى الجديد في قاعدة المعرفة
       ku: [
-        { title: "Ci bikim", artist: "Raperin - Mesut Kaya", plays: "220K" },
-        { title: "Xeribi", artist: "Ciwan Haco - Mûzîka Kurdî", plays: "117K" },
-        { title: "Sebra Dılemın", artist: "Erol Berxwedan", plays: "56.3K" },
-        { title: "Min Bihisti", artist: "Ceger Issa", plays: "191K" },
-        { title: "Emir Kuda Çu", artist: "Hozan Dîno", plays: "72K" },
-        { title: "evin u jinda", artist: "rodinbaran", plays: "35.4K" },
-        { title: "SEWDASIZAMIN", artist: "BRADER", plays: "130K" },
-        { title: "Dıgerım", artist: "Serhat Saltan", plays: "169K" },
-        { title: "Xece Dem", artist: "Veysi İMTAN", plays: "169K" }
+        { title: "Ez Kurdistan Im", artist: "Serhado", plays: "" },
+        { title: "Zap Zap Zape", artist: "sanliurfaHDP", plays: "" },
+        { title: "Awaze Ciya Kato", artist: "Kadar Baze Kurdi", plays: "" },
+        { title: "Awazê Çiya | Navê Wê", artist: "ewrêdeng", plays: "" },
+        { title: "Awaze çiya - biji biji ypg", artist: "kurdishmusics", plays: "" }
+      ],
+      // الأغاني العربية - قائمة افتراضية (يمكن تحديثها لاحقًا)
+      ar: [
+        { title: "أغنية 1", artist: "فنان 1", plays: "" },
+        { title: "أغنية 2", artist: "فنان 2", plays: "" },
+        { title: "أغنية 3", artist: "فنان 3", plays: "" },
+        { title: "أغنية 4", artist: "فنان 4", plays: "" },
+        { title: "أغنية 5", artist: "فنان 5", plays: "" }
       ],
       // الأغاني الإنجليزية - من المحتوى الجديد
       en: [
-        { title: "Attention (Edit)", artist: "Charlie Puth", plays: "8.7M" },
-        { title: "Rockabye (Rework)", artist: "Jayson Sankar", plays: "10.3M" },
-        { title: "We Dont Talk Anymore (Cover)", artist: "salimahgz", plays: "3M" },
-        { title: "I'm A Mess", artist: "Bea Go", plays: "28M" },
-        { title: "FRIENDS (Remix)", artist: "CryJaxx Too", plays: "28M" }
+        { title: "Ssio ehrenloser remix", artist: "Nikurazu", plays: "" },
+        { title: "Paris Freestyle x Gangstas Paradise", artist: "r58", plays: "" },
+        { title: "Airwaves Remix", artist: "roland", plays: "" },
+        { title: "SSIO - HASH HASH x Barbra Streisand", artist: "FW", plays: "" },
+        { title: "SSIO vs. Usher - Yeah Nuttööö", artist: "Daniel Hein Mashups", plays: "" }
       ],
-      // الأغاني العربية - من المحتوى السابق (جاهز)
-      ar: [
-        { title: "Sarrah", artist: "Elissa", plays: "1.1M" },
-        { title: "Nour El Ein (Remix)", artist: "Amr Diab", plays: "741K" },
-        { title: "Ya Tabtab (Remix)", artist: "Nancy Ajram", plays: "667K" },
-        { title: "Etmad", artist: "Tamer Hosny", plays: "420K" },
-        { title: "Ya Reit", artist: "Mohamed Mounir", plays: "320K" },
-        { title: "Baddi Doub", artist: "Haifa Wehbe", plays: "300K" },
-        { title: "Aak El Alb", artist: "Sherine", plays: "280K" },
-        { title: "Tamally Maak (Remix)", artist: "Amr Diab", plays: "260K" }
-      ],
-      // الأغاني الألمانية - من المحتوى السابق (جاهز)
+      // الأغاني الألمانية - من المحتوى الجديد
       de: [
-        { title: "Atemlos durch die Nacht", artist: "Helene Fischer", plays: "2.4M" },
-        { title: "Du", artist: "Cro", plays: "1.8M" },
-        { title: "Ich will immer wieder dieses Fieber spüren", artist: "Helene Fischer", plays: "920K" },
-        { title: "Nur für dich", artist: "Capital Bra", plays: "780K" },
-        { title: "Herz gegen Kopf", artist: "Sarah Connor", plays: "670K" },
-        { title: "Freiheit", artist: "Adel Tawil", plays: "540K" },
-        { title: "Au Revoir", artist: "Mark Forster", plays: "480K" },
-        { title: "Für dich", artist: "Yvonne Catterfeld", plays: "420K" }
+        { title: "Ssio ehrenloser remix", artist: "Nikurazu", plays: "" },
+        { title: "Paris Freestyle x Gangstas Paradise", artist: "r58", plays: "" },
+        { title: "Airwaves Remix", artist: "roland", plays: "" },
+        { title: "SSIO - HASH HASH x Barbra Streisand", artist: "FW", plays: "" },
+        { title: "SSIO vs. Usher - Yeah Nuttööö", artist: "Daniel Hein Mashups", plays: "" }
       ]
     };
 
